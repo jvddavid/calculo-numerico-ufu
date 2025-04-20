@@ -4,6 +4,7 @@ clear all;
 clc;
 
 % load function file
+source './functions/zero-de-funcoes/common.m';
 source './functions/zero-de-funcoes/bisseccao.m';
 
 % Metodo da bissecção
@@ -44,11 +45,10 @@ if t < 1 || t > 3
 end
 
 if t == 2
-  k = zeroFuncaoBisseccaoEstimativaInteracoes(a, b, d);
+  k = zeroFuncaoEstimativaInteracoes(a, b, d);
   fprintf('a estimativa para a quantidade de interações é de %d\n', k);
 end
 
 [x, count] = zeroFuncaoBisseccao(@f, a, b, t, d);
 
 fprintf('a raiz aproximada é %f, após %d interações.\n', x, count);
-

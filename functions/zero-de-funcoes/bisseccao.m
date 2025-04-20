@@ -8,11 +8,6 @@
 % os sinais de f(x) nos extremos do intervalo [a, b] devem ser contrários, isto é f(a)f(b) < 0.
 % Dentro do intervalo [a, b] deve existir um único x tal que f(x) = 0.
 
-% função para calcular a quantidade aproximada que será necessaria dado o erro relativo
-function k = zeroFuncaoBisseccaoEstimativaInteracoes(a, b, d)
-  k = ceil((log(b - a) - log(d)) / log(2));
-endfunction
-
 % função do metodo de bissecção retornando a raiz e a quantidade de iterações
 % essa função recebe a f(x), o intervalo [a, b], o tipo de parada, e o valor para o determinado tipo de parada
 function [x, count] = zeroFuncaoBisseccao(f, a, b, t, d)
