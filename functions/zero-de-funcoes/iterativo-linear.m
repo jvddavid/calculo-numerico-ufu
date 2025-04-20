@@ -8,20 +8,29 @@
 % os sinais de f(x) nos extremos do intervalo [a, b] devem ser contrários, isto é f(a)f(b) < 0.
 % Dentro do intervalo [a, b] deve existir um único x tal que f(x) = 0.
 
-% função do metodo de bissecção retornando a raiz e a quantidade de iterações
-% essa função recebe a f(x), a fk1(x) sendo a função de interação, o intervalo [a, b], o chute inicial, o tipo de parada, e o valor para o determinado tipo de parada
-function [x, count] = zeroFuncaoInterativoLinear(f, fk1, a, b, x0, t, d)
-  % validando pré-requisito 2
-  if f(a) * f(b) >= 0
-    error('os sinais de f(x) nos extremos do intervalo [%f, %f] não são contrários', a, b);
-    return;
+% função do metodo iterativo linear retornando a raiz e a quantidade de iterações
+function [raiz, iteracoes] = zeroFuncaoInterativoLinear(f, g, x0, tol, max_iter)
+  % f: função original
+  % g: função de iteração
+  % x0: aproximação inicial
+  % tol: tolerância para o erro
+  % max_iter: número máximo de iterações
+
+  iteracoes = 0;
+  x = x0;
+
+  while iteracoes < max_iter
+    x_next = g(x); % Calcula a próxima aproximação
+    erro = abs(x_next - x); % Calcula o erro
+
+    if erro < tol
+      raiz = x_next;
+      return;
+    end
+
+    x = x_next;
+    iteracoes = iteracoes + 1;
   end
 
-  if x0 <= a || x0 >= b
-    error('o valor de x0 não está no intervalo (%f, %f).', a, b);
-    return;
-  endif
-
-  # TODO: implements the function
-endfunction
-
+  error('O método não convergiu dentro do número máximo de iterações.');
+end
