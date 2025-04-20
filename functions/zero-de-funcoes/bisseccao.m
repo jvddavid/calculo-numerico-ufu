@@ -10,7 +10,7 @@
 
 % função do metodo de bissecção retornando a raiz e a quantidade de iterações
 % essa função recebe a f(x), o intervalo [a, b], o tipo de parada, e o valor para o determinado tipo de parada
-function [x, count] = zeroFuncaoBisseccao(f, a, b, t, d)
+function [x, count, results] = zeroFuncaoBisseccao(f, a, b, t, d)
   % validando pré-requisito 2
   if f(a) * f(b) >= 0
     error('os sinais de f(x) nos extremos do intervalo [%f, %f] não são contrários', a, b);
@@ -19,6 +19,8 @@ function [x, count] = zeroFuncaoBisseccao(f, a, b, t, d)
 
   count = 0;
   x = 0.5 * (a + b);
+  results = zeros(100, 8);
+  results(count + 1, :) = [count; a; x; b; f(a); f(x); f(b); abs(b - a)];
 
   while (t == 1 && abs(f(x)) >= d) || (t == 2 && abs(a - b) >= d) || (t == 3 && count < d)
     if f(a) * f(x) < 0
@@ -28,6 +30,7 @@ function [x, count] = zeroFuncaoBisseccao(f, a, b, t, d)
     endif
     x = 0.5 * (a + b);
     count += 1;
+    results(count + 1, :) = [count; a; x; b; f(a); f(x); f(b); abs(b - a)];
   endwhile
 endfunction
 

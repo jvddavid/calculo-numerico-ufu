@@ -19,36 +19,41 @@ function y = f (x)
 endfunction
 
 % lendo parametros
-a = input('Intervalo [a, b] -> a = ');
-b = input('-> b = ');
-t = input(['Insira a condição de parada: ' ...
-    '1) Valor absoluto |f(x)| < E ou ' ...
-    '2) Erro relativo |Xk+1 - Xk|/|Xk+1| < E ou ' ...
-    '3) máximo de interações < E | condicao = '
-    ]);
-d = 0;
-if t == 1
-  d = input('Insira o valor absoluto |f(x)| = ');
-elseif t == 2
-  d = input('Insira o erro relativo |Xk+1 - Xk|/|Xk+1| = ');
-elseif t == 3
-  d = input('Insira o máximo de interações = ');
-else
-  fprintf('Valor invalido inserido %d, usando valores padrão\n', t);
-  d = 100;
-  t = 3;
-end
-
-if t < 1 || t > 3
-  t = 3;
-  d = 100;
-end
+% a = input('Intervalo [a, b] -> a = ');
+a = 0;
+% b = input('-> b = ');
+b = 1.5;
+% t = input(['Insira a condição de parada: ' ...
+%    '1) Valor absoluto |f(x)| < E ou ' ...
+%    '2) Erro relativo |Xk+1 - Xk|/|Xk+1| < E ou ' ...
+%    '3) máximo de interações < E | condicao = '
+%    ]);
+t = 2;
+d = 0.000001;
+%if t == 1
+%  d = input('Insira o valor absoluto |f(x)| = ');
+%elseif t == 2
+%  d = input('Insira o erro relativo |Xk+1 - Xk|/|Xk+1| = ');
+%elseif t == 3
+%  d = input('Insira o máximo de interações = ');
+%else
+%  fprintf('Valor invalido inserido %d, usando valores padrão\n', t);
+%  d = 100;
+% t = 3;
+%end
 
 if t == 2
   k = zeroFuncaoEstimativaInteracoes(a, b, d);
   fprintf('a estimativa para a quantidade de interações é de %d\n', k);
 end
 
-[x, count] = zeroFuncaoBisseccao(@f, a, b, t, d);
+[x, count, results] = zeroFuncaoBisseccao(@f, a, b, t, d);
+
+% print the table results
+fprintf('iteracao a      \t x      \t b      \t f(a)   \t f(x)   \t f(b)   \t |b - a|\n');
+for i = 1:(count + 1)
+  fprintf('%d\t %f\t %f\t %f\t %f\t %f\t %f\t %f\n', results(i, :));
+end
 
 fprintf('a raiz aproximada é %f, após %d interações.\n', x, count);
+
