@@ -9,6 +9,9 @@ que você pode usar livremente.
 
 ## Tópicos Cobertos
 
+* Zero de Funções
+  * Método da Bissecção
+
 ## License
 
 Every file in this repository is covered by the WTFPL. I decided not to use

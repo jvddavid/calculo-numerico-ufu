@@ -43,9 +43,9 @@ if t < 1 || t > 3
   d = 100;
 end
 
-% validando pré-requisito 2
-if f(a) * f(b) >= 0
-  error('os sinais de f(x) nos extremos do intervalo [%f, %f] não são contrários', a, b);
+if t == 2
+  k = zeroFuncaoBisseccaoEstimativaInteracoes(a, b, d);
+  fprintf('a estimativa para a quantidade de interações é de %d\n', k);
 end
 
 [x, count] = zeroFuncaoBisseccao(@f, a, b, t, d);
